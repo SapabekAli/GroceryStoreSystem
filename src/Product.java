@@ -1,62 +1,48 @@
 public class Product {
-
-    private int  productId;
-    private String name;
-    private double price;
-    private int stockQuantity;
+    protected int productId;
+    protected String name;
+    protected double price;
+    protected int stockQuantity;
 
     public Product(int productId, String name, double price, int stockQuantity) {
         this.productId = productId;
         this.name = name;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
+        setPrice(price);
+        setStockQuantity(stockQuantity);
     }
     public Product() {}
 
-    public int getProductId() {
-        return productId;
-    } public void setProductId(int productId) {
-        this.productId = productId;
-    }
+    public int getProductId() { return productId; }
+    public void setProductId(int productId) { this.productId = productId; }
 
-    public String getName() {
-        return name;
-    } public void setName(String name) {
-        this.name = name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public double getPrice() {
-        return price;
-    } public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getStockQuantity() {
-        return stockQuantity;
-    } public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
-
-    public boolean isInStock() {
-        if (stockQuantity > 0) {
-            return true;
-        }
-        else  {
-            return false;
+    public double getPrice() { return price; }
+    public void setPrice(double price) {
+        if (price >= 0) {
+            this.price = price;
+        } else {
+            System.out.println("Error: Price cannot be less than 0!");
+            this.price = 0;
         }
     }
-    public void restock(int quantity) {
-        this.stockQuantity += quantity;
-        System.out.println("Restocked: " + this.name + " x " + this.stockQuantity);
+
+    public int getStockQuantity() { return stockQuantity; }
+    public void setStockQuantity(int stockQuantity) {
+        if (stockQuantity >= 0) {
+            this.stockQuantity = stockQuantity;
+        } else {
+            this.stockQuantity = 0;
+        }
+    }
+
+    public String getCategory() {
+        return "General goods";
     }
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + productId +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + stockQuantity +
-                '}' ;
+        return "[" + getCategory() + "] " + name + ", Price: " + price;
     }
 }
